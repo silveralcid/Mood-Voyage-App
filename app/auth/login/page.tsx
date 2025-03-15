@@ -12,6 +12,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
+import { SocialLoginSection } from "@/components/auth/social-login-section"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -95,8 +96,12 @@ export default function LoginPage() {
           <CardTitle className="text-2xl font-bold text-center">Welcome Back</CardTitle>
           <CardDescription className="text-center">Continue your emotional intelligence journey</CardDescription>
         </CardHeader>
-        <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-6">
+
+        <CardContent className="space-y-6">
+          {/* Social Login Buttons */}
+          <SocialLoginSection />
+
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -145,9 +150,7 @@ export default function LoginPage() {
             </div>
 
             {errors.form && <p className="text-sm text-red-500 text-center">{errors.form}</p>}
-          </CardContent>
 
-          <CardFooter className="flex flex-col space-y-4 px-6 py-4">
             <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700" disabled={isLoading}>
               {isLoading ? (
                 <>
@@ -161,15 +164,17 @@ export default function LoginPage() {
                 </>
               )}
             </Button>
+          </form>
+        </CardContent>
 
-            <div className="text-center text-sm">
-              Don&apos;t have an account?{" "}
-              <Link href="/auth/register" className="text-indigo-600 hover:underline font-medium">
-                Create account
-              </Link>
-            </div>
-          </CardFooter>
-        </form>
+        <CardFooter className="flex justify-center px-6 py-4">
+          <div className="text-center text-sm">
+            Don&apos;t have an account?{" "}
+            <Link href="/auth/register" className="text-indigo-600 hover:underline font-medium">
+              Create account
+            </Link>
+          </div>
+        </CardFooter>
       </Card>
     </div>
   )

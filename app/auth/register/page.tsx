@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { SocialLoginSection } from "@/components/auth/social-login-section"
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -99,8 +100,12 @@ export default function RegisterPage() {
           <CardTitle className="text-2xl font-bold text-center">Join Mood Voyage</CardTitle>
           <CardDescription className="text-center">Start your journey to emotional intelligence</CardDescription>
         </CardHeader>
-        <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-6">
+
+        <CardContent className="space-y-6">
+          {/* Social Login Buttons */}
+          <SocialLoginSection />
+
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name</Label>
               <Input
@@ -161,9 +166,7 @@ export default function RegisterPage() {
             </div>
 
             {errors.form && <p className="text-sm text-red-500 text-center">{errors.form}</p>}
-          </CardContent>
 
-          <CardFooter className="flex flex-col space-y-4 px-6 py-4">
             <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700" disabled={isLoading}>
               {isLoading ? (
                 <>
@@ -177,15 +180,17 @@ export default function RegisterPage() {
                 </>
               )}
             </Button>
+          </form>
+        </CardContent>
 
-            <div className="text-center text-sm">
-              Already have an account?{" "}
-              <Link href="/auth/login" className="text-indigo-600 hover:underline font-medium">
-                Sign in
-              </Link>
-            </div>
-          </CardFooter>
-        </form>
+        <CardFooter className="flex justify-center px-6 py-4">
+          <div className="text-center text-sm">
+            Already have an account?{" "}
+            <Link href="/auth/login" className="text-indigo-600 hover:underline font-medium">
+              Sign in
+            </Link>
+          </div>
+        </CardFooter>
       </Card>
     </div>
   )
